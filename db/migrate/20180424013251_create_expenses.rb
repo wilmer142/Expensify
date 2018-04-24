@@ -1,11 +1,11 @@
 class CreateExpenses < ActiveRecord::Migration[5.0]
   def change
     create_table :expenses do |t|
-      t.int :type
+      t.integer :type
       t.datetime :date
       t.string :concept
-      t.int :category
-      t.double :amount
+      t.integer :category
+      t.float :amount
 
       t.timestamps
     end
