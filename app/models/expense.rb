@@ -15,4 +15,6 @@
 class Expense < ApplicationRecord
 	enum type: [:Purchase, :Withdrawal, :Tranfer, :Payment]
 	enum category: [:Restaurants, :Grocery, :Car, :Services, :Home, :Education, :Fun, :Travel]
+
+	validates :type, :date, :concept, :category, :amount, presence: true
 end
