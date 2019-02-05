@@ -1,7 +1,5 @@
 class ExpensesController < ApplicationController
 
-	before_action :sanitize_page_params, only: [:create]
-
   def index
     @tab = :expenses
     @expenses = Expense.all
@@ -20,12 +18,7 @@ class ExpensesController < ApplicationController
   private
 
   	def expense_params
-  		params.require(:expense).permit(:type, :date, :concept, :category, :amount)
-  	end
-
-  	def sanitize_page_params
-  		binding.pry
-  		expense_params[:type] = expense_params[:type]
+  		params.require(:expense).permit(:expense_type, :date, :concept, :category, :amount)
   	end
 
 end
