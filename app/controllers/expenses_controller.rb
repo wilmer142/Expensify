@@ -10,8 +10,6 @@ class ExpensesController < ApplicationController
   end
 
   def create
-  	expense_params[:type] = expense_params[:type].to_i
-  	binding.pry
   	@expense = Expense.create(expense_params)
   end
 
