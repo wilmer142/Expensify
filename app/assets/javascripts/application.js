@@ -15,3 +15,15 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .
+
+function alertShow(message, type, isPermament = false) {
+	var title = type == "success" ? "¡Éxito!" : type == "error" ? "Error" : "Información";
+
+  $.ambiance({
+    message: message,
+    title: title,
+    type: type,
+    fade: !isPermament,
+    timeout: isPermament ? 0 : 5
+  });
+}
