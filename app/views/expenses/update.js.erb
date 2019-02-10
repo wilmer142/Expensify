@@ -1,0 +1,7 @@
+<% if @expense.errors.empty? %>
+	$('#expenses-table tbody').append('<%= j render "row", expense: @expense %>');
+	alertShow("El gasto ha sido modificado con éxito", "success");
+  $('#expense-modal').modal('hide');
+<% else %>
+	alertShow('<%= @expense.errors.full_messages[0] %>', "error");
+<% end %>
