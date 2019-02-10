@@ -1,18 +1,18 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      <h4 class="filter-header">Transaction Type <span>Choose to filter</span></h4>
+      <h4 class="filter-header">Tipo de transacción <span>Selecciona para filtrar</span></h4>
       <div class="list-group filter-type">
-        <a href="#" class="list-group-item">Purchase</a>
-        <a href="#" class="list-group-item">Withdrawal</a>
-        <!-- more transaction types -->
+        <% @expense_types.each do |expense_type| %>
+          <%= link_to "#{expense_type}", filter_expense_type_path, remote: true, class: 'list-group-item' %>
+        <% end %>
       </div>
 
       <h4 class="filter-header">Categoría <span>Selecciona para filtrar</span></h4>
       <div class="list-group filter-type">
-        <a href="#" class="list-group-item">Restaurants</a>
-        <a href="#" class="list-group-item">Car</a>
-        <!-- more categories  -->
+        <% @categories.each do |category| %>
+          <%= link_to "#{category}", filter_category_path, remote: true, class: 'list-group-item' %>
+        <% end %>
       </div>
     </div>
     <div class="col-md-9 index-data">
@@ -37,11 +37,11 @@
             <span class="glyphicon glyphicon-plus"></span>New Expense
           <% end %>
           <h4 class="dropdown pull-right">
-            <button type="button" class="dropdown-toggle btn btn-link" data-toggle="dropdown">April 2016 <span class="caret"></span></button>
+            <button type="button" class="dropdown-toggle btn btn-link" data-toggle="dropdown"><%= "#{Date::MONTHNAMES[@time_now.month]} #{@time_now.year}" %><span class="caret"></span></button>
             <ul class="dropdown-menu" role="menu">
-              <li role="presentation"><a href="#">April 2016</a></li>
-              <li role="presentation"><a href="#">March 2016</a></li>
-              <!-- more months -->
+              <% (1..12).each do |i| %>
+                <li role="presentation"><a href="#"><%="#{Date::MONTHNAMES[(@time_now - i.month).month]} #{@time_now.year}" %></a></li>  
+              <% end %>
             </ul>
           </h4>
         </div>

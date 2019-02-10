@@ -3,8 +3,10 @@ class ExpensesController < ApplicationController
   before_action :find_expense, :except => [:index, :new, :create]
 
   def index
-    @tab = :expenses
-    @expenses = Expense.all
+    @time_now = Time.now
+    @expense_types = Expense.expense_types.keys.to_a
+    @categories = Expense.categories.keys.to_a
+    @expenses = Expense.where("created_at.month = ?", @time_now.month)
   end
 
   def new
