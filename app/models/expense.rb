@@ -17,4 +17,8 @@ class Expense < ApplicationRecord
 	enum category: [:Restaurants, :Grocery, :Car, :Services, :Home, :Education, :Fun, :Travel]
 
 	validates :expense_type, :date, :concept, :category, :amount, presence: true
+
+	scope :month_filter, ->(filter = 0) {
+		where(:created_at => (Time.now - filter.month).beginning_of_month..(Time.now - filter.month).end_of_month)
+	}
 end

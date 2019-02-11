@@ -4,21 +4,21 @@
       <h4 class="filter-header">Tipo de transacción <span>Selecciona para filtrar</span></h4>
       <div class="list-group filter-type">
         <% @expense_types.each do |expense_type| %>
-          <%= link_to "#{expense_type}", filter_expense_type_path, remote: true, class: 'list-group-item' %>
+          <%= link_to "#{expense_type}", root_path, remote: true, class: 'list-group-item' %>
         <% end %>
       </div>
 
       <h4 class="filter-header">Categoría <span>Selecciona para filtrar</span></h4>
       <div class="list-group filter-type">
         <% @categories.each do |category| %>
-          <%= link_to "#{category}", filter_category_path, remote: true, class: 'list-group-item' %>
+          <%= link_to "#{category}", root_path, remote: true, class: 'list-group-item' %>
         <% end %>
       </div>
     </div>
     <div class="col-md-9 index-data">
       <div class="row" style="margin-top: 10px;">
         <div class="summary-box col-md-4 text-center">
-          <div class="summary-value">$2,500,000</div>
+          <div class="summary-value">$<%= @expenses.sum(:amount) %></div>
           <div class="summary-label">Total</div>
         </diV>
         <div class="summary-box col-md-4 text-center">
@@ -37,12 +37,8 @@
             <span class="glyphicon glyphicon-plus"></span>New Expense
           <% end %>
           <h4 class="dropdown pull-right">
-            <button type="button" class="dropdown-toggle btn btn-link" data-toggle="dropdown"><%= "#{Date::MONTHNAMES[@time_now.month]} #{@time_now.year}" %><span class="caret"></span></button>
-            <ul class="dropdown-menu" role="menu">
-              <% (1..12).each do |i| %>
-                <li role="presentation"><a href="#"><%="#{Date::MONTHNAMES[(@time_now - i.month).month]} #{@time_now.year}" %></a></li>  
-              <% end %>
-            </ul>
+            <%= select_tag(:month_filter, options_for_select(((0..12).collect { |i| current = @time_now.advance(months:-i); ["#{Date::MONTHNAMES[current.month]} #{current.year}", @time_now.month-i ] })), class: 'dropdown-toggle btn btn-link') 
+            %>
           </h4>
         </div>
       </div>

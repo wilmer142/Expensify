@@ -6,7 +6,7 @@ class ExpensesController < ApplicationController
     @time_now = Time.now
     @expense_types = Expense.expense_types.keys.to_a
     @categories = Expense.categories.keys.to_a
-    @expenses = Expense.where("created_at.month = ?", @time_now.month)
+    @expenses = Expense.month_filter
   end
 
   def new
