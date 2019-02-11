@@ -7,6 +7,14 @@ class ExpensesController < ApplicationController
     @expense_types = Expense.expense_types.keys.to_a
     @categories = Expense.categories.keys.to_a
     @expenses = Expense.month_filter
+
+    if params[:category_].present?
+      @expenses = @expenses.where("category = ?", params[:category])
+    end
+
+    if params[:expense_type].present?
+      @expenses = @expenses.where("expense_type = ?", params[:expense_type])
+    end
   end
 
   def new
@@ -21,7 +29,7 @@ class ExpensesController < ApplicationController
   end
 
   def update
-    @expense = Expense.update(expense_params)
+    @expense = Expense.update(params[:id], expense_params)
   end
 
   private
