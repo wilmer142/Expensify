@@ -1,0 +1,6 @@
+<% if @expense.errors.empty? %>
+	$('table tbody tr#<%= @expense.id %>').remove();
+	alertShow("El gasto ha sido eliminado con éxito", "success");
+<% else %>
+	alertShow('<%= @expense.errors.full_messages[0] %>', "error");
+<% end %>

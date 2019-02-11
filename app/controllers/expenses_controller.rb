@@ -32,6 +32,10 @@ class ExpensesController < ApplicationController
     @expense = Expense.update(params[:id], expense_params)
   end
 
+  def destroy
+    @expense = Expense.destroy(params[:id])
+  end
+
   private
 
     def find_expense
